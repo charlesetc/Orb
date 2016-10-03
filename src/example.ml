@@ -1,16 +1,16 @@
 
 open Orb;;
 
-let n = Orb.integer 2;;
+let n = integer 2;;
 
-let v = Orb.vector ();;
+let v = vector ();;
 
 
-let ocaml = Orb.str "OCAML";;
-let is = Orb.str "IS";;
-let awesome = Orb.str "AWESOME!!!";;
+let ocaml = str "OCAML";;
+let is = str "IS";;
+let awesome = str "AWESOME!!!";;
 
-let vector_of_strings = Orb.vector ();;
+let vector_of_strings = vector ();;
 
 vector_of_strings#push awesome;;
 vector_of_strings#push is;;
@@ -18,4 +18,12 @@ vector_of_strings#push ocaml;;
 
 v#push vector_of_strings;;
 
-Orb.puts v;;
+puts v;;
+
+let f = file "text.txt";;
+
+f#puts "hi there!";;
+f#puts "hi there!";;
+puts f#read;;
+
+f#remove;;
