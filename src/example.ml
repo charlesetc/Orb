@@ -3,7 +3,7 @@
 open Orb;;
 
 (* a new integer *)
-let n = integer 2;;
+let n = int 2;;
 
 (* a new vector *)
 let v = vector ();;
@@ -31,5 +31,7 @@ let f = file (str "text.txt");;
 f#puts (str "hi there!");;
 f#puts (str "hi there!");;
 puts (f#read#add (str "\n wowwww"));;
+
+puts ((int 2)#add (int 5));;
 
 f#remove;;

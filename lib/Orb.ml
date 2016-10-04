@@ -13,18 +13,18 @@ end
 
 let str s = new str s
 
-class integer n = object (self : 's)
+class int n = object (self : 's)
   val n = n
 
   method to_string =
     str (string_of_int n)
 
-  method add (other : 's) = self#value + other#value
+  method add (other : 's) = new int (self#value + other#value)
 
   method value = n
 end
 
-let integer n = new integer n
+let int n = new int n
 
 class ['a] vector () = object (self)
   val mutable v : 'a list = []
