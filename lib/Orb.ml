@@ -1,13 +1,15 @@
 
 open Sys;;
 
-let str (s : string) = object (self)
+class str (s : string) = object (self)
   val s = s
   method to_string = self
   method value = s
 end
 
-let integer n = object (self)
+let str s = new str s
+
+class integer n = object (self)
   val n = n
   method to_string =
     str (string_of_int n)
@@ -15,8 +17,10 @@ let integer n = object (self)
   method value = n
 end
 
-let vector () = object (self)
-  val mutable v = []
+let integer n = new integer n
+
+class ['a] vector () = object (self)
+  val mutable v : 'a list = []
 
   method to_string =
     let inner = String.concat " " (List.map (fun o -> o#to_string#value) v) in
@@ -27,24 +31,26 @@ let vector () = object (self)
   method value = v
 end
 
-let file name = object (self)
+let vector () = new vector ()
+
+class ['a] file name = object (self)
   val name = name
 
-  method print s =
-    let oc = open_out_gen [Open_append; Open_creat] 0o644 name in 
-    Printf.fprintf oc "%s" s;
+  method print (s : 'a) =
+    let oc = open_out_gen [Open_append; Open_creat] 0o644 name#to_string#value in 
+    Printf.fprintf oc "%s" s#to_string#value;
     flush oc;
     close_out oc
 
-  method puts s =
-    let oc = open_out_gen [Open_append; Open_creat] 0o644 name in 
-    Printf.fprintf oc "%s\n" s;
+  method puts (s : 'a) =
+    let oc = open_out_gen [Open_append; Open_creat] 0o644 name#to_string#value in 
+    Printf.fprintf oc "%s\n" s#to_string#value;
     flush oc;
     close_out oc
 
   method read =
     let text = ref "" in
-    let ic = open_in name in
+    let ic = open_in name#to_string#value in
     let () =
       try while true do 
         let line = input_line ic in
@@ -54,10 +60,11 @@ let file name = object (self)
     in
       str !text
 
-  method remove = Sys.remove name
+  method remove = Sys.remove name#to_string#value
 
 end
 
+let file name = new file name;;
 
 let puts o = print_endline o#to_string#value;;
 let print o = print_string o#to_string#value;;
