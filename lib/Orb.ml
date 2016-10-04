@@ -1,18 +1,25 @@
 
 open Sys;;
 
-class str (s : string) = object (self)
+class str (s : string) = object (self : 's)
   val s = s
+
   method to_string = self
+
   method value = s
+
+  method add (other : 's) = new str (self#value ^ other#to_string#value)
 end
 
 let str s = new str s
 
-class integer n = object (self)
+class integer n = object (self : 's)
   val n = n
+
   method to_string =
     str (string_of_int n)
+
+  method add (other : 's) = self#value + other#value
 
   method value = n
 end

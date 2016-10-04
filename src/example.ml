@@ -30,6 +30,6 @@ let f = file (str "text.txt");;
 (* file operations *)
 f#puts (str "hi there!");;
 f#puts (str "hi there!");;
-puts f#read;;
+puts (f#read#add (str "\n wowwww"));;
 
 f#remove;;
