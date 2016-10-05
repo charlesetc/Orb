@@ -1,37 +1,40 @@
 
 (* open the orb standard *)
-open Orb;;
+include Orb;;
 
 (* a new integer *)
-let n = int 2;;
+let n = int (2 : _int);;
 
-(* a new vector *)
-let v = vector ();;
+(* a new list *)
+let v = list ();;
 
 
-let ocaml = str "OCAML";;
-let is = str "IS";;
-let awesome = str "AWESOME!!!";;
+let ocaml = string "OCAML";;
+let is = string "IS";;
+let awesome = string "AWESOME!!!";;
 
-let vector_of_strings = vector ();;
+let list_of_strings = list ();;
 
 (* calling methods *)
-vector_of_strings#push awesome;;
-vector_of_strings#push is;;
-vector_of_strings#push ocaml;;
+list_of_strings#push awesome;;
+list_of_strings#push is;;
+list_of_strings#push ocaml;;
 
-v#push vector_of_strings;;
+v#push list_of_strings;;
 
 puts v;;
 
 (* a new file *)
-let f = file (str "text.txt");;
+let f = file (string "text.txt");;
 
 (* file operations *)
-f#puts (str "hi there!");;
-f#puts (str "hi there!");;
-puts (f#read#add (str "\n wowwww"));;
+f#puts (string "hi there!");;
+f#puts (string "hi there!");;
 
-puts ((int 2)#add (int 5));;
+puts $ f#read + string "\n wowwww";;
+
+puts $ int 5 + int 5;;
 
 f#remove;;
+
+puts $ float 10.2 * float 10.0

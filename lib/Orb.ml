@@ -1,44 +1,70 @@
 
 open Sys;;
 
-class str (s : string) = object (self : 's)
+type _int = int;;
+type _string = string;;
+type _float = float;;
+type 'a _list = 'a list;;
+
+let ($) f a = f a;;
+
+class string s = object (self : 's)
   val s = s
 
   method to_string = self
 
   method value = s
 
-  method add (other : 's) = new str (self#value ^ other#to_string#value)
+  method add (other : 's) = new string (self#value ^ other#to_string#value)
+
+  method mult (other : int) = self (* TODO "hi" * 5 => "hihihihihi" *)
 end
 
-let str s = new str s
+let string s = new string s
 
 class int n = object (self : 's)
   val n = n
 
   method to_string =
-    str (string_of_int n)
+    string (string_of_int n)
 
   method add (other : 's) = new int (self#value + other#value)
+
+  method mult (other : 's) = new int (self#value * other#value)
 
   method value = n
 end
 
 let int n = new int n
 
-class ['a] vector () = object (self)
-  val mutable v : 'a list = []
+class float f = object (self : 's)
+  val f = f
+  
+  method to_string =
+    string $ string_of_float f
+
+  method add (other : 's) = new float (self#value +. other#value)
+
+  method mult (other : 's) = new float (self#value *. other#value)
+
+  method value = f
+end
+
+let float n = new float n
+
+class ['a] list () = object (self)
+  val mutable v : 'a _list = []
 
   method to_string =
     let inner = String.concat " " (List.map (fun o -> o#to_string#value) v) in
-    str ("[" ^ inner ^ "]")
+    string ("[" ^ inner ^ "]")
 
   method push o = v <- o::v
 
   method value = v
 end
 
-let vector () = new vector ()
+let list () = new list ()
 
 class ['a] file name = object (self)
   val name = name
@@ -65,7 +91,7 @@ class ['a] file name = object (self)
       done with End_of_file ->
         close_in ic;
     in
-      str !text
+      string !text
 
   method remove = Sys.remove name#to_string#value
 
@@ -75,3 +101,6 @@ let file name = new file name;;
 
 let puts o = print_endline o#to_string#value;;
 let print o = print_string o#to_string#value;;
+
+let (+) a b = a#add b;;
+let ( * ) a b = a#mult b;;
