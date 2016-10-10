@@ -1,3 +1,7 @@
+
+utop: build
+	utop -ppx ./ppx_orb.byte -init ./init.ml
+
 # OASIS_START
 # DO NOT EDIT (digest: a3c674b4239234cbbe53afe090018954)
 

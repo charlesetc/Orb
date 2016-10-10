@@ -2,3 +2,7 @@ S src
 S lib
 B _build/src
 B _build/lib
+PKG ppx_tools
+PKG ppx_tools.metaquot
+
+REC

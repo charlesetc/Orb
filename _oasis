@@ -19,4 +19,8 @@ Executable "example"
 Library "orb"
   Path: lib
   Modules: Orb
-  BuildDepends: unix
+
+Executable "ppx"
+  Path: ppx
+  MainIs: ppx_orb.ml
+  BuildDepends: compiler-libs.common, ppx_tools.metaquot
