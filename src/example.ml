@@ -3,7 +3,7 @@
 include Orb;;
 
 (* a new integer *)
-let n = int (2 : _int);;
+let n : int = 2;;
 
 (* a new list *)
 let v = list ();;
@@ -33,7 +33,7 @@ f#puts (string "hi there!");;
 
 puts $ f#read + string "\n wowwww";;
 
-puts $ int 5 + int 5;;
+puts $ 5 + 5;;
 
 f#remove;;
 

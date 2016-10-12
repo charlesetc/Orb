@@ -4,23 +4,25 @@ Synopsis: A object-oriented standard library
 Authors: Charlesetc
 License: Apache-2.0
 
-Description: Orb provides an interface into the ocaml language that attemps to standardize the methods you need to remember to interact with an object. Instead of "int_of_float", for example, it's just "#to_float".
+Description: Orb provides an interface into the ocaml language that attempts to standardize the methods you need to rememeber to interact with an object. Instead of "int_of_float", for example, it's just "#to_float".
 Homepage: http://github.com/charlesetc/orb
 
 OASISFormat: 0.4
+
 BuildTools: ocamlbuild
 Plugins: META (0.4), DevFiles (0.4)
 
-Executable "example"
-  Path: src
-  MainIs: example.ml
-  BuildDepends: orb
+Executable "ppx_orb"
+  Path: ppx
+  MainIs: ppx_orb.ml
+  BuildDepends: compiler-libs.common
 
 Library "orb"
   Path: lib
   Modules: Orb
 
-Executable "ppx"
-  Path: ppx
-  MainIs: ppx_orb.ml
-  BuildDepends: compiler-libs.common, ppx_tools.metaquot
+Executable "example"
+  Path: src
+  MainIs: example.ml
+  BuildDepends: orb
+  ByteOpt: -ppx ppx/ppx_orb.byte
