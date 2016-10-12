@@ -8,7 +8,11 @@ let orb_mapper argv =
     expr = fun mapper expr ->
       match expr with
       | { pexp_desc = Pexp_constant (Const_int i); pexp_loc = loc } ->
-          { expr with pexp_desc = Pexp_apply ( { expr with pexp_desc = Pexp_ident {txt = Lident "int"; loc = loc}}, [("", {expr with pexp_desc = Pexp_constant (Const_int i)})]) }
+          let integer_constant = Pexp_constant (Const_int i) in
+          let int_ident = { expr with pexp_desc = Pexp_ident { txt = Lident "int"; loc = loc } } in
+          let int_arguments = [("", {expr with pexp_desc = integer_constant})] in
+          let apply_int = Pexp_apply ( int_ident, int_arguments ) in
+          { expr with pexp_desc = apply_int }
       | other -> default_mapper.expr mapper other; }
 
 let () =

@@ -1,7 +1,4 @@
 
-# utop: build
-# 	utop -ppx ./ppx_orb.byte -init ./init.ml
-
 # OASIS_START
 # DO NOT EDIT (digest: a3c674b4239234cbbe53afe090018954)
 
@@ -43,3 +40,6 @@ configure:
 .PHONY: build doc test all install uninstall reinstall clean distclean configure
 
 # OASIS_STOP
+
+top: build
+	utop -ppx ./ppx_orb.byte -init ./init.ml
