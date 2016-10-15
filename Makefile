@@ -1,4 +1,9 @@
 
+# clean because it doesn't always
+# recompile the ppx executable.
+everything: clean build
+
+
 # OASIS_START
 # DO NOT EDIT (digest: a3c674b4239234cbbe53afe090018954)
 

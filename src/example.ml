@@ -9,9 +9,9 @@ let n : int = 2;;
 let v = list ();;
 
 
-let ocaml = string "OCAML";;
-let is = string "IS";;
-let awesome = string "AWESOME!!!";;
+let ocaml = "OCAML";;
+let is = "IS";;
+let awesome = "AWESOME!!!";;
 
 let list_of_strings = list ();;
 
@@ -25,13 +25,13 @@ v#push list_of_strings;;
 puts v;;
 
 (* a new file *)
-let f = file (string "text.txt");;
+let f = file ("text.txt");;
 
 (* file operations *)
-f#puts (string "hi there!");;
-f#puts (string "hi there!");;
+f#puts "hi there!";;
+f#puts "hi there!";;
 
-puts $ f#read + string "\n wowwww";;
+puts $ f#read + "\n wowwww";;
 
 puts $ 5 + 5;;
 
