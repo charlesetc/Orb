@@ -28,7 +28,18 @@ let string_mapper pexp_desc loc =
           (* Some pexp_desc *)
       | other -> None
 
-let alternative_mappers = [string_mapper; int_mapper]
+
+(* maps record access to method calls and method calls to record access *)
+let field_mapper pexp_desc loc =
+  (* let pexpr = gen_pexpr loc in *)
+  match pexp_desc with
+    | Pexp_field ({ pexp_desc = Pexp_ident { txt = Lident receiver; _ } ; _ }, { txt =  Lident field_name; _ }) ->
+        Some (Pexp_send ({ pexp_desc = Pexp_ident { txt = Lident receiver; loc = loc } ; pexp_loc = loc ; pexp_attributes = []}, field_name))
+    | Pexp_send ({ pexp_desc = Pexp_ident { txt = Lident receiver; _ } ; _ }, field_name) ->
+        Some (Pexp_field ({ pexp_desc = Pexp_ident { txt = Lident receiver; loc = loc } ; pexp_loc = loc ; pexp_attributes = [] }, { txt =  Lident field_name; loc = loc }))
+    | other -> None
+
+let alternative_mappers = [string_mapper; int_mapper; field_mapper]
 
 let ast_mapper argv =
   { default_mapper with

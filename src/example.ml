@@ -16,11 +16,11 @@ let awesome = "AWESOME!!!";;
 let list_of_strings = list ();;
 
 (* calling methods *)
-list_of_strings#push awesome;;
-list_of_strings#push is;;
-list_of_strings#push ocaml;;
+list_of_strings.push awesome;;
+list_of_strings.push is;;
+list_of_strings.push ocaml;;
 
-v#push list_of_strings;;
+v.push list_of_strings;;
 
 puts v;;
 
@@ -28,14 +28,14 @@ puts v;;
 let f = file ("text.txt");;
 
 (* file operations *)
-f#puts "hi there!";;
-f#puts "hi there!";;
+f.puts "hi there!";;
+f.puts "hi there!";;
 
-puts $ f#read + "\n wowwww";;
+puts $ f.read + "\n wowwww";;
 
 puts $ 5 + 5;;
 
-f#remove;;
+f.remove;;
 
 let name = "charles" ;;
 puts $ "hi there, " + name + "!!";;
