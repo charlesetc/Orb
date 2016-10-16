@@ -38,6 +38,6 @@ puts $ 5 + 5;;
 f.remove;;
 
 let name = "charles" ;;
-puts $ "hi there, " + name + "!!";;
 
-puts $ float 10.2 * float 10.0
+puts $ "hi there, " + name + "!!";;
+puts $ 10.2003 * 100.

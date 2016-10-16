@@ -17,6 +17,16 @@ let int_mapper pexp_desc loc =
       Some (Pexp_apply ( int_ident, int_arguments ))
   | other ->  None
 
+(* float mapper maps floats *)
+let float_mapper pexp_desc loc =
+  let pexpr = gen_pexpr loc in
+  match pexp_desc with
+  | Pexp_constant (Const_float i) ->
+      let float_ident = pexpr (Pexp_ident { txt = Lident "float"; loc = loc }) in
+      let float_arguments = [("", (pexpr pexp_desc))] in
+      Some (Pexp_apply ( float_ident, float_arguments ))
+  | other ->  None
+
 (* string mapper maps strings *)
 let string_mapper pexp_desc loc =
   let pexpr = gen_pexpr loc in
@@ -39,7 +49,7 @@ let field_mapper pexp_desc loc =
         Some (Pexp_field ({ pexp_desc = Pexp_ident { txt = Lident receiver; loc = loc } ; pexp_loc = loc ; pexp_attributes = [] }, { txt =  Lident field_name; loc = loc }))
     | other -> None
 
-let alternative_mappers = [string_mapper; int_mapper; field_mapper]
+let alternative_mappers = [string_mapper; int_mapper; float_mapper; field_mapper]
 
 let ast_mapper argv =
   { default_mapper with
