@@ -25,7 +25,7 @@ v.push list_of_strings;;
 puts v;;
 
 (* a new file *)
-let f = file ("text.txt");;
+let f = file "text.txt";;
 
 (* file operations *)
 f.puts "hi there!";;
