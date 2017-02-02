@@ -22,7 +22,13 @@ Library "orb"
   Modules: Orb
 
 Executable "example"
-  Path: src
+  Path: example
   MainIs: example.ml
+  BuildDepends: orb
+  ByteOpt: -ppx ppx/ppx_orb.byte
+
+Executable "test"
+  Path: src
+  MainIs: test.ml
   BuildDepends: orb
   ByteOpt: -ppx ppx/ppx_orb.byte

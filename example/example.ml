@@ -31,13 +31,13 @@ let f = file "text.txt";;
 f.puts "hi there!";;
 f.puts "hi there!";;
 
-puts $ f.read + "\n wowwww";;
+puts ^ f.read + "\n wowwww";;
 
-puts $ 5 + 5;;
+puts ^ 5 + 5;;
 
 f.remove;;
 
 let name = "charles" ;;
 
-puts $ "hi there, " + name + "!!";;
-puts $ 10.2003 * 100.
+puts ^ "hi there, " + name + "!!";;
+puts ^ 10.2003 * 100.

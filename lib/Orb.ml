@@ -6,8 +6,6 @@ type _string = string;;
 type _float = float;;
 type 'a _list = 'a list;;
 
-let ($) f a = f a;;
-
 class string s = object (self : 's)
   val s = s
 
@@ -41,7 +39,7 @@ class float f = object (self : 's)
   val f = f
   
   method to_string =
-    string $ string_of_float f
+    string (string_of_float f)
 
   method add (other : 's) = new float (self#value +. other#value)
 
@@ -104,3 +102,4 @@ let print o = print_string o#to_string#value;;
 
 let (+) a b = a#add b;;
 let ( * ) a b = a#mult b;;
+let (^) f a = f a;;
