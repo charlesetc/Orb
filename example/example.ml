@@ -13,12 +13,12 @@ let ocaml = "OCAML";;
 let is = "IS";;
 let awesome = "AWESOME!!!";;
 
-let list_of_strings = list ();;
+let list_of_strings = Orb.List.from_list ["hi"; "there"] ;;
 
 (* calling methods *)
 list_of_strings.push awesome;;
-list_of_strings.push is;;
-list_of_strings.push ocaml;;
+list_of_strings += is;;
+list_of_strings += ocaml;;
 
 v.push list_of_strings;;
 

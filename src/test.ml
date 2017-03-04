@@ -1,7 +1,5 @@
 
-include Orb;;
-
-puts (2 + 2)
+include Orb
 
 let f x = x * 2
 
