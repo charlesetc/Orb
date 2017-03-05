@@ -21,6 +21,17 @@ Library "orb"
   Path: lib
   Modules: Orb
 
+Library "orbjs"
+  Path: lib_js
+  Modules: Orbjs
+  BuildDepends: orb, js_of_ocaml
+
+Executable "example_js"
+  Path: example_js
+  MainIs: example_js.ml
+  BuildDepends: orbjs
+  ByteOpt: -ppx ppx/ppx_orb.byte
+
 Executable "example"
   Path: example
   MainIs: example.ml

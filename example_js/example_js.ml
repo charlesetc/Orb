@@ -1,5 +1,5 @@
 
-open Orb
+open Orbjs
 
 let f x = x * 2
 

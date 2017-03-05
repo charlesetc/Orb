@@ -15,5 +15,9 @@ UTop.prompt := fst (React.S.create prompt);;
 
 UTop.add_keyword "puts";;
 #directory "./_build/lib";;
+#load "orb_string.cmo";;
+#load "orb_numeric.cmo";;
+#load "orb_list.cmo";;
+#load "orb_file.cmo";;
 #load "orb.cma";;
-open Orb;;
+include Orb;;
