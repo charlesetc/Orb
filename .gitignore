@@ -4,3 +4,5 @@ setup.log
 *.byte
 *.native
 *.js
+*.swp
+*.swo
