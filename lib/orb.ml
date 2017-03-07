@@ -11,6 +11,13 @@ module Numeric = Orb_numeric
 module List = Orb_list
 module File = Orb_file
 
+(* these are generic functions that
+   operate on all sorts of data types.
+
+   They're kinda what make Orb awesome
+
+ *)
+
 let puts o = print_endline o#to_string#value;;
 let print o = print_string o#to_string#value;;
 
