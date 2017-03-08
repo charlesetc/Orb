@@ -17,7 +17,7 @@ puts ^ "hi " + "you" ;
 
 Uhh...
 
-Did you just change what integers do? **yep**
+Did you just change what integers and strings do? **yep**
 
 Did you just change the `^` operator? **you bet**
 
