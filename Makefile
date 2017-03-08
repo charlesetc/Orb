@@ -1,14 +1,7 @@
 
 # clean because it doesn't always
 # recompile the ppx executable.
-everything: fullclean build js
-
-fullclean: clean
-	@rm -f example_js/example_js.js
-
-js:
-	@js_of_ocaml example_js.byte
-	@cp example_js.js example_js
+everything: clean build
 
 
 # OASIS_START
