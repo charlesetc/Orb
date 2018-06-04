@@ -1,6 +1,5 @@
 
-(* open the orb standard *)
-include Orb;;
+open Orb
 
 (* a new integer *)
 let n : int = 2;;

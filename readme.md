@@ -32,4 +32,5 @@ library. Is it usable now? *No*.
 At its least, Orb showcases how useful Ppx is, and just how configurable
 OCaml is.
 
-Want a repl to play with? Just `make top`.
+See [example/example.ml](example/example.ml) for more weirdness!
+Run with `jbuilder exec example/example.exe`.
