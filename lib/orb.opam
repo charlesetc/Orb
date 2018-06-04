@@ -1,0 +1,16 @@
+opam-version: "1.2"
+name: "orb"
+version: "0.2"
+maintainer: "Charles Chamberlain"
+author: "Charles Chamberlain"
+homepage: ""
+bug-reports: ""
+license: ""
+dev-repo: ""
+build: [
+  ["./configure" "--prefix=%{prefix}%"]
+  [make]
+]
+install: [make "install"]
+remove: ["ocamlfind" "remove" "project"]
+depends: "ocamlfind"

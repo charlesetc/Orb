@@ -1,3 +1,3 @@
-
 (library
-  ((name orb)))
+  ((name orb)
+   (public_name orb)))

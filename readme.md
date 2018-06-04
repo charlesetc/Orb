@@ -33,4 +33,4 @@ At its least, Orb showcases how useful Ppx is, and just how configurable
 OCaml is.
 
 See [example/example.ml](example/example.ml) for more weirdness!
-Run with `jbuilder exec example/example.exe`.
+Want a repl? Just `make top`
