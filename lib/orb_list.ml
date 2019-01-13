@@ -1,19 +1,21 @@
-
 open Orb_string
 
-type 'a _list = 'a list;;
+type 'a _list = 'a list
 
-class ['a] list () = object (self)
-  val mutable v : 'a _list = []
+class ['a] list () =
+  object (self)
+    val mutable v : 'a _list = []
 
-  method to_string =
-    let inner = String.concat " " (List.map (fun o -> o#to_string#value) v) in
-    string ("[" ^ inner ^ "]")
+    method to_string =
+      let inner =
+        String.concat " " (List.map (fun o -> (o#to_string)#value) v)
+      in
+      string ("[" ^ inner ^ "]")
 
-  method push o = v <- o::v
+    method push o = v <- o :: v
 
-  method value = v
-end
+    method value = v
+  end
 
 let list () = new list ()
 
@@ -27,4 +29,3 @@ module Orb_list = struct
     List.iter (fun item -> orb_list#push item) l ;
     orb_list
 end
-

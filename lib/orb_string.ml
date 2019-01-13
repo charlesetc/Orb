@@ -10,7 +10,7 @@ class string s = object (self : 's)
 
   method add (other : 's) = new string (self#value ^ other#to_string#value)
 
-  method mult (other : int) = self (* TODO "hi" * 5 => "hihihihihi" *)
+  method mult (_other : int) = self (* TODO "hi" * 5 => "hihihihihi" *)
 end
 
 let string s = new string s

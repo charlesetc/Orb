@@ -1,5 +1,6 @@
 
 example:
+	make clean
 	jbuilder exec example/example.exe
 
 top:
