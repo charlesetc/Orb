@@ -1,7 +1,7 @@
 
 # Orb
 
-Orb does some crazy stuff...
+Orb does some pretty weird stuff...
 
 Basically Orb is a collection of libraries, and then an ast mapper (ppx)
 that rewrites normal OCaml literals to use Orb's types. And then some more
