@@ -1,16 +1,17 @@
+type _string = string
 
-type _string = string;;
+class string s =
+  object (self : 's)
+    val s = s
 
-class string s = object (self : 's)
-  val s = s
+    method to_string = self
 
-  method to_string = self
+    method value = s
 
-  method value = s
+    method add (other : 's) = new string (self#value ^ (other#to_string)#value)
 
-  method add (other : 's) = new string (self#value ^ other#to_string#value)
-
-  method mult (_other : int) = self (* TODO "hi" * 5 => "hihihihihi" *)
-end
+    method mult (_other : int) = self
+    (* TODO "hi" * 5 => "hihihihihi" *)
+  end
 
 let string s = new string s

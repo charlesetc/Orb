@@ -79,8 +79,6 @@ let field_pass expr =
   | _ ->
       None
 
-let single_passes = [string_pass; int_pass; float_pass]
-
 (* (1* This was written before ppxlib drivers were mainstream, *)
 (*  * I bet this could be refactored to use them instead. *1) *)
 (* let rec orb_expr passes mapper expr = *)
