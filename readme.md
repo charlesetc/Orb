@@ -13,6 +13,7 @@ So for example, this is all valid orb:
 puts ^ 2 + 2 ;
 puts ^ 2.3 + 5.6 ;
 puts ^ "hi " + "you" ;
+puts {var = 23}.var ;
 ```
 
 Uhh...
@@ -23,8 +24,9 @@ Did you just change the `^` operator? **you bet**
 
 Did you make everything an object? **I did**
 
-I think that OCaml's standard library does some things very badly, for
-example `print_endline` should work on all data.
+I love OCaml: even the object system! Orb doesn't mess around with
+inheritance but takes full advantage of the row polymorphism
+presented by the object system and polymorphic variants in OCaml.
 
 So at its best Orb is an attempt to make a usable alternative standard
 library. Is it usable now? *No*.

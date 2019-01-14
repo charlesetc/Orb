@@ -1,4 +1,4 @@
-open Orb_string
+(* open Orb_string
 
 class ['a] file name =
   object (self)
@@ -37,3 +37,4 @@ class ['a] file name =
   end
 
 let file name = new file name
+*)

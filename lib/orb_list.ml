@@ -1,31 +1,64 @@
-open Orb_string
+open Orb_internal
 
-type 'a _list = 'a list
+type 'a internal_list =
+  [ `Cons of 'a * 'a internal_list
+  | `Nil ]
 
-class ['a] list () =
+let rec internal_list_of_ocaml_list = function
+  | x :: rest ->
+      `Cons (x, internal_list_of_ocaml_list rest)
+  | [] ->
+      `Nil
+
+class ['a] t (initial : 'a internal_list) =
   object (self)
-    val mutable v : 'a _list = []
+    val mutable v : 'a internal_list = initial
 
-    method to_string =
-      let inner =
-        String.concat " " (List.map (fun o -> (o#to_string)#value) v)
+    method to_ocaml_list =
+      let rec convert = function
+        | `Cons (hd, tl) ->
+            hd :: convert tl
+        | `Nil ->
+            []
       in
-      string ("[" ^ inner ^ "]")
+      convert v
 
-    method push o = v <- o :: v
+    (* Alternative, slower map implementation: 
+       
+        let mapped =
+          self#to_ocaml_list |> List.map f |> internal_list_of_ocaml_list
+        in
+        `Some (new t mapped)
+    *)
+    method map f : 'b t wrapped =
+      let rec map f = function
+        | `Cons (hd, tl) ->
+            `Cons (f hd, map f tl)
+        | `Nil ->
+            `Nil
+      in
+      let mapped = map f v in
+      `Some (new t mapped)
 
+    method to_string : Orb_string.t wrapped =
+      let inner =
+        self#to_ocaml_list
+        |> List.map (fun o -> (unwrap o)#to_string)
+        |> List.map get_ocaml_value
+        |> String.concat ", "
+      in
+      Orb_string.create ("[" ^ inner ^ "]")
+
+    method push o = v <- `Cons (o, v)
+
+    (* method pop = match *)
     method value = v
   end
 
-let list () = new list ()
+let create lst = `Some (new t (internal_list_of_ocaml_list lst))
 
-module Orb_list = struct
-  (* this Orb_list module contains the methods exposed in 
-   * Orb.List but not just Orb. Likewise, it's not Orb.List.list
-   * it's just Orb.list *)
+let rec cons (hd, rst) =
+  (unwrap rst)#push hd ;
+  rst
 
-  let from_list l =
-    let orb_list = list () in
-    List.iter (fun item -> orb_list#push item) l ;
-    orb_list
-end
+let rec nil () = create []

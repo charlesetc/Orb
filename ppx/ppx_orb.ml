@@ -28,6 +28,16 @@ let string_pass expr =
   | _ ->
       None
 
+let list_pass expr =
+  let loc = expr.pexp_loc in
+  match expr.pexp_desc with
+  | Pexp_construct ({txt = Lident "::"; _}, Some expr) ->
+      Some [%expr Orb.List.cons [%e expr]]
+  | Pexp_construct ({txt = Lident "[]"; _}, None) ->
+      Some [%expr Orb.List.nil ()]
+  | _ ->
+      None
+
 let object_pass expr =
   match expr.pexp_desc with
   (* I'm not sure what the None represent here. *)
@@ -55,7 +65,7 @@ let object_pass expr =
             } )
           fields
       in
-      Some
+      let expr =
         { expr with
           pexp_desc =
             Pexp_object
@@ -64,13 +74,29 @@ let object_pass expr =
                   ; ppat_loc = expr.pexp_loc
                   ; ppat_attributes = [] }
               ; pcstr_fields = fields } }
+      in
+      let loc = expr.pexp_loc in
+      Some [%expr `Some [%e expr]]
   | _ ->
+      (* note: It could be nice to turn objects into record literals when
+         * needed.*)
       None
 
 (* maps record access to method calls and method calls to record access *)
 let field_pass expr =
+  let loc = expr.pexp_loc in
   match expr.pexp_desc with
+  | Pexp_field
+      ( ({pexp_desc = Pexp_ident {txt = Lident "self"; _}; _} as reciever)
+      , field ) ->
+      (* Do not try to unwrap `self`.
+       * It's not easy to wrap it in a `Some... if this becomes important
+       * try instead to defined a method on every object that wraps self.
+       * *)
+      let field = {field with txt = Longident.last field.txt} in
+      Some {expr with pexp_desc = Pexp_send (reciever, field)}
   | Pexp_field (reciever, field) ->
+      let reciever = [%expr match [%e reciever] with `Some a -> a] in
       let field = {field with txt = Longident.last field.txt} in
       Some {expr with pexp_desc = Pexp_send (reciever, field)}
   | Pexp_send (reciever, field) ->
@@ -79,26 +105,11 @@ let field_pass expr =
   | _ ->
       None
 
-(* (1* This was written before ppxlib drivers were mainstream, *)
-(*  * I bet this could be refactored to use them instead. *1) *)
-(* let rec orb_expr passes mapper expr = *)
-(*   match passes with *)
-(*   | [] -> *)
-(*       default_mapper.expr mapper expr *)
-(*   | (pass_name, pass) :: rest -> *)
-(*     ( match pass expr with *)
-(*     | Some expr -> *)
-(*         Pprintast.expression Format.std_formatter expr ; *)
-(*         print_endline (pass_name ^ " pass \n") ; *)
-(*         (1* orb_expr rest mapper expr *1) *)
-(*         expr *)
-(*     | None -> *)
-(*         orb_expr rest mapper expr ) *)
-
-let run_object_pass mapper expr =
+let map_expr mapper expr =
   let recurse = Ast_mapper.default_mapper.expr mapper in
   let expr = match object_pass expr with Some expr -> expr | None -> expr in
   let expr = match field_pass expr with Some expr -> expr | None -> expr in
+  let expr = match list_pass expr with Some expr -> expr | None -> expr in
   match (string_pass expr, int_pass expr, float_pass expr) with
   | Some expr, _, _ ->
       expr
@@ -109,7 +120,7 @@ let run_object_pass mapper expr =
   | None, None, None ->
       recurse expr
 
-let orb_mapper () = {default_mapper with expr = run_object_pass}
+let orb_mapper () = {default_mapper with expr = map_expr}
 
 let () =
   Migrate_parsetree.Driver.register
