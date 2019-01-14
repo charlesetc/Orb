@@ -7,7 +7,7 @@ Basically Orb is a collection of libraries, and then an ast mapper (ppx)
 that rewrites normal OCaml literals to use Orb's types. And then some more
 functions for fun...
 
-So for example, this is a valid, complete, orb program:
+So for example, this is a valid, complete, Orb program:
 
 ```
 puts ^ 2 + 2 ;
