@@ -7,9 +7,11 @@ class t f =
     method to_string : Orb_string.t wrapped =
       Orb_string.create (string_of_float f)
 
-    method add (other : 's) = new t (self#value +. other#value)
+    method add (other : t wrapped) : t wrapped =
+      `Some (new t (self#value +. unwrap_value other))
 
-    method mult (other : 's) = new t (self#value *. other#value)
+    method mult (other : t wrapped) : t wrapped =
+      `Some (new t (self#value *. unwrap_value other))
 
     method value = f
   end

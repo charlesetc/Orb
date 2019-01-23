@@ -23,8 +23,7 @@ module String = Orb_string
 module Int = Orb_int
 module Float = Orb_float
 module List = Orb_list
-
-(* module File = Orb_file *)
+module File = Orb_file
 
 (* Strings *)
 
@@ -50,11 +49,15 @@ let list = List.create
 
 (* type 'a list = [`Some of 'a List.t] *)
 
+(* Files *)
+
+let file = File.create
+
 (* these are generic functions that
  * operate on all sorts of data types.
  * They're kinda what make Orb awesome *)
 
-let puts o = (unwrap o)#to_string |> get_ocaml_value |> print_endline
+let puts o = (unwrap o)#to_string |> unwrap_value |> print_endline
 
 (* let print o = print_string (o#to_string)#value *)
 

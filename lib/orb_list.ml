@@ -44,7 +44,7 @@ class ['a] t (initial : 'a internal_list) =
       let inner =
         self#to_ocaml_list
         |> List.map (fun o -> (unwrap o)#to_string)
-        |> List.map get_ocaml_value
+        |> List.map unwrap_value
         |> String.concat ", "
       in
       Orb_string.create ("[" ^ inner ^ "]")

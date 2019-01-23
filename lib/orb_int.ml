@@ -8,10 +8,10 @@ class t n =
       Orb_string.create (string_of_int n)
 
     method add (other : t wrapped) : t wrapped =
-      `Some (new t (n + (unwrap other)#value))
+      `Some (new t (n + unwrap_value other))
 
     method mult (other : t wrapped) : t wrapped =
-      `Some (new t (n * (unwrap other)#value))
+      `Some (new t (n * unwrap_value other))
 
     method value = n
   end

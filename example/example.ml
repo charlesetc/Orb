@@ -30,7 +30,6 @@ let () = v.push ["yo"; "pretty cool"]
 
 let () = puts v
 
-(*
 (* a new file *)
 let f = file "text.txt"
 
@@ -40,7 +39,7 @@ let () = f.puts "hi there!"
 
 let () = f.puts "hi there!"
 
-let () = puts ^ (f.read + "\n wowwww")
+let () = puts ^ ("this was read from a file: (" + f.read + ")")
 
 let () = puts ^ (5 + 5)
 
@@ -51,7 +50,6 @@ let name = "charles"
 let () = puts ^ ("hi there, " + name + "!!")
 
 let () = puts ^ (10.2003 * 100.)
-*)
 
 let o = {x = 1000; y = {z = 2}; get_x = self.x}
 
