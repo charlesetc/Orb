@@ -106,10 +106,11 @@ let field_pass expr =
       None
 
 let map_expr mapper expr =
-  let recurse = Ast_mapper.default_mapper.expr mapper in
+  (* First try to match against an expression that has subexpressions *)
   let expr = match object_pass expr with Some expr -> expr | None -> expr in
   let expr = match field_pass expr with Some expr -> expr | None -> expr in
   let expr = match list_pass expr with Some expr -> expr | None -> expr in
+  (* Then try to match against leaf expressions *)
   match (string_pass expr, int_pass expr, float_pass expr) with
   | Some expr, _, _ ->
       expr
@@ -118,7 +119,8 @@ let map_expr mapper expr =
   | _, _, Some expr ->
       expr
   | None, None, None ->
-      recurse expr
+      (* If none of the literals match, map with the ast default mapper. *)
+      Ast_mapper.default_mapper.expr mapper expr
 
 let orb_mapper () = {default_mapper with expr = map_expr}
 
