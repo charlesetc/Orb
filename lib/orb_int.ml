@@ -1,7 +1,7 @@
 open Orb_internal
 
 class t n =
-  object (self)
+  object
     val n : int = n
 
     method to_string : Orb_string.t wrapped =

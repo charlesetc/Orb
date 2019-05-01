@@ -1,4 +1,0 @@
-(executable
-  ((name orb_test)
-   (preprocess (pps (ppx_orb)))
-   (libraries (orb))))

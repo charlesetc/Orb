@@ -1,5 +1,0 @@
-(library
-  ((name ppx_orb)
-   (kind ppx_rewriter)
-   (libraries (compiler-libs ocaml-migrate-parsetree))
-   (preprocess (pps (ppxlib.metaquot)))))

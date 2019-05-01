@@ -57,8 +57,8 @@ class ['a] t (initial : 'a internal_list) =
 
 let create lst = `Some (new t (internal_list_of_ocaml_list lst))
 
-let rec cons (hd, rst) =
+let cons (hd, rst) =
   (unwrap rst)#push hd ;
   rst
 
-let rec nil () = create []
+let empty () = create []

@@ -1,4 +1,0 @@
-(executable
-  ((name ppx_orb_classic)
-   (modules (ppx_orb_classic))
-   (libraries (ppx_orb))))

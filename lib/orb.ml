@@ -1,4 +1,3 @@
-open Sys
 open Orb_internal
 
 (* Development guidelines
@@ -24,6 +23,10 @@ module Int = Orb_int
 module Float = Orb_float
 module List = Orb_list
 module File = Orb_file
+
+(* Options *)
+
+let nil = Orb_internal.nil
 
 (* Strings *)
 

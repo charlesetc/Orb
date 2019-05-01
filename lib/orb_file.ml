@@ -2,7 +2,7 @@ open Orb_internal
 
 let create name =
   `Some
-    (object (self)
+    (object
        val name : string = (unwrap name)#to_string |> unwrap_value
 
        (* At some point in time it would be nice to remove the duplication in

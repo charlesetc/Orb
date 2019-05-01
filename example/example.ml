@@ -1,7 +1,7 @@
 open Orb
 
 (* a new integer *)
-let n = {a = {b = 2}}
+let n = { a = { b = 2 } }
 
 let () = puts (n.a.b + 3)
 
@@ -14,7 +14,7 @@ let is = "IS"
 
 let awesome = "AWESOME!!!"
 
-let list_of_strings = ["hi"; "there"]
+let list_of_strings = [ "hi"; "there" ]
 
 (* calling methods *)
 
@@ -26,7 +26,7 @@ let () = list_of_strings += ocaml
 
 let () = v.push list_of_strings
 
-let () = v.push ["yo"; "pretty cool"]
+let () = v.push [ "yo"; "pretty cool" ]
 
 let () = puts v
 
@@ -51,10 +51,10 @@ let () = puts ^ ("hi there, " + name + "!!")
 
 let () = puts ^ (10.2003 * 100.)
 
-let o = {x = 1000; y = {z = 2}; get_x = self.x}
+let o = { x = 1000; y = { z = 2 }; get_x = self.x }
 
 let () = puts o.get_x
 
 let () = puts o.y.z
 
-let () = puts {var = 23}.var
+let () = puts { var = 23 }.var
