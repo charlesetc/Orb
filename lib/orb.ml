@@ -32,19 +32,19 @@ let nil = Orb_internal.nil
 
 let string = String.create
 
-type string = [`Some of String.t]
+type string = [ `Some of String.t ]
 
 (* Integers *)
 
 let int = Int.create
 
-type int = [`Some of Int.t]
+type int = [ `Some of Int.t ]
 
 (* Floats *)
 
 let float = Float.create
 
-type float = [`Some of Float.t]
+type float = [ `Some of Float.t ]
 
 (* Lists *)
 

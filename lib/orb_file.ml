@@ -8,13 +8,13 @@ let create name =
        (* At some point in time it would be nice to remove the duplication in
      * these methods *)
        method print (s : 'a) =
-         let oc = open_out_gen [Open_append; Open_creat] 0o644 name in
+         let oc = open_out_gen [ Open_append; Open_creat ] 0o644 name in
          Printf.fprintf oc "%s" (to_string_unwrap s) ;
          flush oc ;
          close_out oc
 
        method puts (s : 'a) : unit =
-         let oc = open_out_gen [Open_append; Open_creat] 0o644 name in
+         let oc = open_out_gen [ Open_append; Open_creat ] 0o644 name in
          Printf.fprintf oc "%s" (to_string_unwrap s) ;
          flush oc ;
          close_out oc
@@ -28,7 +28,9 @@ let create name =
                let line = input_line ic in
                text := !text ^ "\n" ^ line
              done
-           with End_of_file -> close_in ic
+           with
+           | End_of_file ->
+               close_in ic
          in
          Orb_string.create !text
 

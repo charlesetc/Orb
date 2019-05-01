@@ -2,13 +2,14 @@ open Orb_internal
 
 type 'a internal_list =
   [ `Cons of 'a * 'a internal_list
-  | `Nil ]
+  | `Empty
+  ]
 
 let rec internal_list_of_ocaml_list = function
   | x :: rest ->
       `Cons (x, internal_list_of_ocaml_list rest)
   | [] ->
-      `Nil
+      `Empty
 
 class ['a] t (initial : 'a internal_list) =
   object (self)
@@ -18,7 +19,7 @@ class ['a] t (initial : 'a internal_list) =
       let rec convert = function
         | `Cons (hd, tl) ->
             hd :: convert tl
-        | `Nil ->
+        | `Empty ->
             []
       in
       convert v
@@ -34,8 +35,8 @@ class ['a] t (initial : 'a internal_list) =
       let rec map f = function
         | `Cons (hd, tl) ->
             `Cons (f hd, map f tl)
-        | `Nil ->
-            `Nil
+        | `Empty ->
+            `Empty
       in
       let mapped = map f v in
       `Some (new t mapped)
