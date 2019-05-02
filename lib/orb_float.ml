@@ -4,8 +4,8 @@ class t f =
   object (self : 's)
     val f : float = f
 
-    method to_string : Orb_string.t wrapped =
-      Orb_string.create (string_of_float f)
+    method to_string : Hidden.String.t =
+      Hidden.String.create (string_of_float f)
 
     method add (other : t wrapped) : t wrapped =
       `Some (new t (self#value +. unwrap_value other))

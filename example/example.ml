@@ -47,7 +47,7 @@ let () = f.remove
 
 let name = "charles"
 
-let () = puts ^ ("hi there, " + name + "!!")
+let () = puts ^ ("hi there, " + (name * 3) + "!!")
 
 let () = puts ^ (10.2003 * 100.)
 

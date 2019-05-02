@@ -41,14 +41,14 @@ class ['a] t (initial : 'a internal_list) =
       let mapped = map f v in
       `Some (new t mapped)
 
-    method to_string : Orb_string.t wrapped =
+    method to_string : Hidden.String.t =
       let inner =
         self#to_ocaml_list
         |> List.map (fun o -> (unwrap o)#to_string)
         |> List.map unwrap_value
         |> String.concat ", "
       in
-      Orb_string.create ("[" ^ inner ^ "]")
+      Hidden.String.create ("[" ^ inner ^ "]")
 
     method push o = v <- `Cons (o, v)
 

@@ -18,8 +18,8 @@ open Orb_internal
  * *)
 
 (* Exposed modules *)
-module String = Orb_string
-module Int = Orb_int
+module String = Hidden.String
+module Int = Hidden.Int
 module Float = Orb_float
 module List = Orb_list
 module File = Orb_file
@@ -32,19 +32,19 @@ let nil = Orb_internal.nil
 
 let string = String.create
 
-type string = [ `Some of String.t ]
+type string = String.t
 
 (* Integers *)
 
 let int = Int.create
 
-type int = [ `Some of Int.t ]
+type int = Int.t
 
 (* Floats *)
 
 let float = Float.create
 
-type float = [ `Some of Float.t ]
+type float = Float.t
 
 (* Lists *)
 

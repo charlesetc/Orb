@@ -19,7 +19,7 @@ let create name =
          flush oc ;
          close_out oc
 
-       method read : Orb_string.t wrapped =
+       method read : Hidden.String.t =
          let text = ref "" in
          let ic = open_in name in
          let () =
@@ -32,7 +32,7 @@ let create name =
            | End_of_file ->
                close_in ic
          in
-         Orb_string.create !text
+         Hidden.String.create !text
 
        method remove = Sys.remove name
     end)
