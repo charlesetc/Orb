@@ -37,8 +37,6 @@ let f = file "text.txt"
 
 let () = f.puts "hi there!"
 
-let () = f.puts "hi there!"
-
 let () = puts ^ ("this was read from a file: (" + f.read + ")")
 
 let () = puts ^ (5 + 5)

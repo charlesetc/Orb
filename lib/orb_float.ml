@@ -1,19 +1,23 @@
 open Orb_internal
+open Hidden
 
-class t f =
-  object (self : 's)
-    val f : float = f
+type t =
+  < value : float
+  ; to_string : String.t
+  ; add : float -> float
+  ; mult : float -> float >
+  wrapped
 
-    method to_string : Hidden.String.t =
-      Hidden.String.create (string_of_float f)
+let rec create f =
+  `Some
+    (object (self : 's)
+       val f : float = f
 
-    method add (other : t wrapped) : t wrapped =
-      `Some (new t (self#value +. unwrap_value other))
+       method to_string = Hidden.String.create (string_of_float f)
 
-    method mult (other : t wrapped) : t wrapped =
-      `Some (new t (self#value *. unwrap_value other))
+       method add other = create (self#value +. unwrap_value other)
 
-    method value = f
-  end
+       method mult other = create (self#value *. unwrap_value other)
 
-let create f = `Some (new t f)
+       method value = f
+    end)
