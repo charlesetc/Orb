@@ -26,7 +26,7 @@ module File = Orb_file
 
 (* Options *)
 
-let nil = Orb_internal.nil
+let nil = `Nil
 
 (* Strings *)
 

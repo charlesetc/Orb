@@ -25,6 +25,8 @@ let rec create (initial : 'a internal_list) =
          in
          convert v
 
+       (* method head = *)
+       (*   match v with `Empty -> `Nil | `Cons (`Some hd, _) -> `Some hd *)
        method map f =
          let rec map f = function
            | `Cons (hd, tl) ->
