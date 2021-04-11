@@ -1,5 +1,5 @@
 
-# Orb
+# Orb [deprecated: doesn't compile with recent ocaml]
 
 Orb does some pretty weird stuff...
 
